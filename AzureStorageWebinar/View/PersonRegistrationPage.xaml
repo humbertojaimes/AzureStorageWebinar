@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage Title="Registro" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AzureStorageWebinar.View.PersonRegistrationPage" xmlns:effects="clr-namespace:AzureStorageWebinar;assembly=AzureStorageWebinar"  xmlns:converters="clr-namespace:AzureStorageWebinar.View.Converters">
+<ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ByteArrayToImageConverter x:Key="photoCvt" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <TableView BackgroundColor="White" HasUnevenRows="true" Intent="Form">
+            <TableView.Effects>
+                <effects:NoInteractiveTableViewEffect />
+            </TableView.Effects>
+            <TableSection Title="Foto">
+                <ViewCell>
+                    <StackLayout >
+                        <Frame Margin="0,5,0,0" WidthRequest="154" HeightRequest="154" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Black" OutlineColor="Black" Padding="2">
+                            <Image WidthRequest="150" HeightRequest="150" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFill" Source="{Binding Photo,Converter={StaticResource photoCvt}}" />
+                        </Frame>
+                        <Label Margin="5"  HorizontalTextAlignment="Center" />
+                        <ActivityIndicator HorizontalOptions="Center" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+                        <StackLayout Margin="40,0,40,0" VerticalOptions="Center" Orientation="Horizontal">
+                            <Button HorizontalOptions="FillAndExpand" Command="{Binding TakePhotoCommand}" Text="Tomar foto" />
+                            </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+            <TableSection Title="Datos">
+                <ViewCell>
+                    <StackLayout Style="{DynamicResource CommonVerticalStackLayout}">
+            
+                        <Entry x:Name="name" Placeholder="Nombre" Text="{Binding Name}">
+                            <Entry.Effects>
+                                <effects:KeyboardReturnEffect />
+                            </Entry.Effects>
+                          
+                        </Entry>
+                        <Entry x:Name="lastname"  Placeholder="Apellido" Text="{Binding LastName}">
+                            <Entry.Effects>
+                                <effects:KeyboardReturnEffect />
+                            </Entry.Effects>
+
+                        </Entry>
+                        <Button HorizontalOptions="FillAndExpand" Command="{Binding SavePersonCommand}" Text="Guardar" />
+                           
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>
